@@ -141,6 +141,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
         }
 
         /// <summary>
+        /// In dotnet-watch, edits have already occured to the file on disk, but not to the workspace.
+        /// In such an event, avoid 
+        /// </summary>
+        internal bool SuppressSaveEditsToDisk { get; set; }
+
+        /// <summary>
         /// Associates a project file extension with a language name.
         /// </summary>
         public void AssociateFileExtensionWithLanguage(string projectFileExtension, string language)
@@ -365,9 +371,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var document = this.CurrentSolution.GetDocument(documentId);
             if (document != null)
             {
-                var encoding = DetermineEncoding(text, document);
+                if (!SuppressSaveEditsToDisk)
+                {
+                    var encoding = DetermineEncoding(text, document);
 
-                this.SaveDocumentText(documentId, document.FilePath, text, encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+                    this.SaveDocumentText(documentId, document.FilePath, text, encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+                }
+
                 this.OnDocumentTextChanged(documentId, text, PreservationMode.PreserveValue);
             }
         }
