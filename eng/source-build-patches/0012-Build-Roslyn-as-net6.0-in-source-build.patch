@@ -65,20 +65,20 @@ index 8f38a48cd95..c8ba19fdf98 100644
 +
  </Project>
 diff --git a/eng/Versions.props b/eng/Versions.props
-index 1cad2918891..a7e80667b4a 100644
+index 627f9c4..4e986e7 100644
 --- a/eng/Versions.props
 +++ b/eng/Versions.props
-@@ -25,6 +25,10 @@
-     </MinorVersion>
-     <MicrosoftNetCompilersToolsetVersion>3.10.0-1.21101.2</MicrosoftNetCompilersToolsetVersion>
+@@ -26,6 +26,10 @@
+     <MicrosoftNetCompilersToolsetVersion>3.10.0-2.21151.4</MicrosoftNetCompilersToolsetVersion>
    </PropertyGroup>
-+  <PropertyGroup>
+   <PropertyGroup>
 +    <TargetFrameworkForNETSDK>netcoreapp3.1</TargetFrameworkForNETSDK>
 +    <TargetFrameworkForNETSDK Condition="'$(DotNetBuildFromSource)' == 'true'">net6.0</TargetFrameworkForNETSDK>
 +  </PropertyGroup>
-   <PropertyGroup>
++  <PropertyGroup>
      <!-- Versions used by several individual references below -->
      <RoslynDiagnosticsNugetPackageVersion>3.3.2-beta1.20562.1</RoslynDiagnosticsNugetPackageVersion>
+     <MicrosoftCodeAnalysisNetAnalyzersVersion>6.0.0-preview1.21054.10</MicrosoftCodeAnalysisNetAnalyzersVersion>
 diff --git a/src/Compilers/CSharp/csc/csc.csproj b/src/Compilers/CSharp/csc/csc.csproj
 index 01e6741bb09..0d1b86f4a69 100644
 --- a/src/Compilers/CSharp/csc/csc.csproj
